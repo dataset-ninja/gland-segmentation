@@ -86,9 +86,9 @@ def convert_and_upload_supervisely_project(
         tags_data = im_name_to_tags[image_name]
         patient_id = sly.Tag(tag_id, value=int(tags_data[0]))
         glas = tags_data[1]
-        if glas == "benign":
+        if "benign" in glas:
             glas = sly.Tag(tag_benign)
-        elif glas == "malignant":
+        elif "malignant" in glas:
             glas = sly.Tag(tag_malignant)
         sirinukunwattana = sly.Tag(tag_sirinukunwattana, value=tags_data[2])
         mask_path = os.path.join(dataset_path, image_name + masks_suffix)
@@ -136,13 +136,19 @@ def convert_and_upload_supervisely_project(
         if im_name[:5] == "train" and len(im_name.split("_")) == 2
     ]
 
-    test_images_names = [
+    test_A_images_names = [
         im_name
         for im_name in os.listdir(dataset_path)
-        if im_name[:4] == "test" and len(im_name.split("_")) == 2
+        if im_name[:5] == "testA" and len(im_name.split("_")) == 2
     ]
 
-    ds_name_to_images_names = {"train": train_images_names, "test": test_images_names}
+    test_B_images_names = [
+        im_name
+        for im_name in os.listdir(dataset_path)
+        if im_name[:5] == "testB" and len(im_name.split("_")) == 2
+    ]
+
+    ds_name_to_images_names = {"train": train_images_names, "test_a": test_A_images_names, "test_b": test_B_images_names}
 
     for ds_name, images_names in ds_name_to_images_names.items():
         dataset = api.dataset.create(project.id, ds_name, change_name_if_conflict=True)
