@@ -1,3 +1,5 @@
+import csv
+import numpy as np
 import supervisely as sly
 import os
 from dataset_tools.convert import unpack_if_archive
@@ -70,16 +72,94 @@ def convert_and_upload_supervisely_project(
     api: sly.Api, workspace_id: int, project_name: str
 ) -> sly.ProjectInfo:
     ### Function should read local dataset and upload it to Supervisely project, then return project info.###
-    raise NotImplementedError("The converter should be implemented manually.")
-
-    # dataset_path = "/local/path/to/your/dataset" # general way
-    # dataset_path = download_dataset(teamfiles_dir) # for large datasets stored on instance
-
-    # ... some code here ...
-
-    # sly.logger.info('Deleting temporary app storage files...')
-    # shutil.rmtree(storage_dir)
-
-    # return project
+    dataset_path = "Warwick_QU_Dataset"
+    tags_path = os.path.join("Warwick_QU_Dataset","Grade.csv")
+    batch_size = 30
+    masks_suffix = "_anno.bmp"
 
 
+    def create_ann(image_path):
+        labels = []
+
+        image_name = get_file_name(image_path)
+
+        tags_data = im_name_to_tags[image_name]
+        patient_id = sly.Tag(tag_id, value=int(tags_data[0]))
+        glas = tags_data[1]
+        if glas == "benign":
+            glas = sly.Tag(tag_benign)
+        elif glas == "malignant":
+            glas = sly.Tag(tag_malignant)
+        sirinukunwattana = sly.Tag(tag_sirinukunwattana, value=tags_data[2])
+        mask_path = os.path.join(dataset_path, image_name + masks_suffix)
+        mask_np = sly.imaging.image.read(mask_path)[:, :, 0]
+        img_height = mask_np.shape[0]
+        img_wight = mask_np.shape[1]
+        unique_pixels = np.unique(mask_np)[1:]
+        for pixel in unique_pixels:
+            mask = mask_np == pixel
+            curr_bitmap = sly.Bitmap(mask)
+            curr_label = sly.Label(curr_bitmap, obj_class)
+            labels.append(curr_label)
+
+        return sly.Annotation(
+            img_size=(img_height, img_wight),
+            labels=labels,
+            img_tags=[patient_id, glas, sirinukunwattana],
+        )
+
+
+    obj_class = sly.ObjClass("gland", sly.Bitmap)
+
+    tag_id = sly.TagMeta("patient id", sly.TagValueType.ANY_NUMBER)
+    tag_malignant = sly.TagMeta("malignant", sly.TagValueType.NONE)
+    tag_benign = sly.TagMeta("benign", sly.TagValueType.NONE)
+    tag_sirinukunwattana = sly.TagMeta("grade Sirinukunwattana", sly.TagValueType.ANY_STRING)
+
+
+    project = api.project.create(workspace_id, project_name, change_name_if_conflict=True)
+    meta = sly.ProjectMeta(
+        obj_classes=[obj_class],
+        tag_metas=[tag_id, tag_malignant, tag_benign, tag_sirinukunwattana],
+    )
+    api.project.update_meta(project.id, meta.to_json())
+
+    im_name_to_tags = {}
+    with open(tags_path, "r") as file:
+        csvreader = csv.reader(file)
+        for row in csvreader:
+            im_name_to_tags[row[0]] = row[1:]
+
+    train_images_names = [
+        im_name
+        for im_name in os.listdir(dataset_path)
+        if im_name[:5] == "train" and len(im_name.split("_")) == 2
+    ]
+
+    test_images_names = [
+        im_name
+        for im_name in os.listdir(dataset_path)
+        if im_name[:4] == "test" and len(im_name.split("_")) == 2
+    ]
+
+    ds_name_to_images_names = {"train": train_images_names, "test": test_images_names}
+
+    for ds_name, images_names in ds_name_to_images_names.items():
+        dataset = api.dataset.create(project.id, ds_name, change_name_if_conflict=True)
+
+        progress = sly.Progress("Create dataset {}".format(ds_name), len(images_names))
+
+        for img_names_batch in sly.batched(images_names, batch_size=batch_size):
+            images_pathes_batch = [
+                os.path.join(dataset_path, image_name) for image_name in img_names_batch
+            ]
+
+            img_infos = api.image.upload_paths(dataset.id, img_names_batch, images_pathes_batch)
+            img_ids = [im_info.id for im_info in img_infos]
+
+            anns_batch = [create_ann(image_path) for image_path in images_pathes_batch]
+            api.annotation.upload_anns(img_ids, anns_batch)
+
+            progress.iters_done_report(len(img_names_batch))
+    
+    return project
