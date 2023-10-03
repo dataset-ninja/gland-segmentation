@@ -15,7 +15,7 @@ from dataset_tools.templates import (
 ##################################
 PROJECT_NAME: str = "GlaS@MICCAI'2015: Gland Segmentation"
 PROJECT_NAME_FULL: str = "GlaS@MICCAI'2015: Gland Segmentation"
-HIDE_DATASET = True  # set False when 100% sure about repo quality
+HIDE_DATASET = False  # set False when 100% sure about repo quality
 
 ##################################
 # * After uploading to instance ##
