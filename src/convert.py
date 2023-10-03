@@ -111,10 +111,10 @@ def convert_and_upload_supervisely_project(
 
     obj_class = sly.ObjClass("gland", sly.Bitmap)
 
-    tag_id = sly.TagMeta("patient id", sly.TagValueType.ANY_NUMBER)
+    tag_id = sly.TagMeta("patient_id", sly.TagValueType.ANY_NUMBER)
     tag_malignant = sly.TagMeta("malignant", sly.TagValueType.NONE)
     tag_benign = sly.TagMeta("benign", sly.TagValueType.NONE)
-    tag_sirinukunwattana = sly.TagMeta("grade Sirinukunwattana", sly.TagValueType.ANY_STRING)
+    tag_sirinukunwattana = sly.TagMeta("grade_sirinukunwattana", sly.TagValueType.ANY_STRING)
 
 
     project = api.project.create(workspace_id, project_name, change_name_if_conflict=True)

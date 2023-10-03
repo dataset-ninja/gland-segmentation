@@ -43,7 +43,7 @@ GITHUB_URL: str = "https://github.com/dataset-ninja/gland-segmentation"
 ##################################
 ### * Optional after uploading ###
 ##################################
-DOWNLOAD_ORIGINAL_URL: Optional[Union[str, dict]] = None
+DOWNLOAD_ORIGINAL_URL: Optional[Union[str, dict]] = ["https://www.kaggle.com/datasets/sani84/glasmiccai2015-gland-segmentation"]
 # Optional link for downloading original dataset (e.g. "https://some.com/dataset/download")
 
 CLASS2COLOR: Optional[Dict[str, List[str]]] = None
@@ -51,18 +51,18 @@ CLASS2COLOR: Optional[Dict[str, List[str]]] = None
 
 # If you have more than the one paper, put the most relatable link as the first element of the list
 # Use dict key to specify name for a button
-PAPER: Optional[Union[str, List[str], Dict[str, str]]] = None
+PAPER: Optional[Union[str, List[str], Dict[str, str]]] = ["https://arxiv.org/abs/1603.00275"]
 BLOGPOST: Optional[Union[str, List[str], Dict[str, str]]] = None
 REPOSITORY: Optional[Union[str, List[str], Dict[str, str]]] = None
 
-CITATION_URL: Optional[str] = None
-AUTHORS: Optional[List[str]] = None
+CITATION_URL: Optional[str] = ["https://arxiv.org/abs/1603.00275"]
+AUTHORS: Optional[List[str]] = ["Korsuk Sirinukunwattana", "Josien P. W. Pluim", "Hao Chen", "Xiaojuan Qi", "Pheng-Ann Heng", "Yun Bo Guo", "Li Yang Wang", "Bogdan J. Matuszewski", "Elia Bruni", "Urko Sanchez", "Anton Böhm", "Olaf Ronneberger", "Bassem Ben Cheikh", "Daniel Racoceanu", "Philipp Kainz", "Michael Pfeiffer", "Martin Urschler", "David R. J. Snead", "Nasir M. Rajpoot"]
 
-ORGANIZATION_NAME: Optional[Union[str, List[str]]] = None
+ORGANIZATION_NAME: Optional[Union[str, List[str]]] = ["University of Warwick", "Eindhoven University of Technology", "The Chinese University of Hong Kong", "University of Central Lancashire", "University of Freiburg", "ExB Research and Development", "Biomedical Imaging Laboratory (LIB)", "Medical University of Graz", " University of Zurich and ETH Zurich", "Graz University of Technology", "Ludwig Boltzmann Institute for Clinical Forensic Imaging", "University Hospitals Coventry and Warwickshire"]
 ORGANIZATION_URL: Optional[Union[str, List[str]]] = None
 
 # Set '__PRETEXT__' or '__POSTTEXT__' as a key with string value to add custom text. e.g. SLYTAGSPLIT = {'__POSTTEXT__':'some text}
-SLYTAGSPLIT: Optional[Dict[str, Union[List[str], str]]] = None
+SLYTAGSPLIT: Optional[Dict[str, Union[List[str], str]]] = {"__POSTTEXT__":"Also, the dataset contains ***patient_id***, ***grade_sirinukunwattana*** and ***malignant***/***benign*** tags"}
 TAGS: Optional[List[str]] = None
 
 
