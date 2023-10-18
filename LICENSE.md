@@ -1,1 +1,3 @@
-GlaS@MICCAI'2015: Gland Segmentation is under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/legalcode) license.
+ADD CUSTOM LICENSE MANUALLY
+
+[Source](https://www.kaggle.com/datasets/sani84/glasmiccai2015-gland-segmentation)
