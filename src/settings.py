@@ -20,7 +20,7 @@ HIDE_DATASET = False  # set False when 100% sure about repo quality
 ##################################
 # * After uploading to instance ##
 ##################################
-LICENSE: License = License.CC_BY_NC_4_0()
+LICENSE: License = License.Custom(source_url="https://www.kaggle.com/datasets/sani84/glasmiccai2015-gland-segmentation")
 APPLICATIONS: List[Union[Industry, Domain, Research]] = [Industry.Medical(),Research.Medical()]
 CATEGORY: Category = Category.Medical()
 
