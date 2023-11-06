@@ -10,7 +10,7 @@ K. Sirinukunwattana, J. P. W. Pluim, H. Chen, X Qi, P. Heng, Y. Guo, L. Wang, B.
 http://arxiv.org/abs/1603.00275 [Preprint]
 ```
 
-The detials of the journal version will be available soon.
+The details of the journal version will be available soon.
 
 AND the following paper, wherein the same dataset was first used:
 ```
