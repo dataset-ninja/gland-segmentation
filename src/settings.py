@@ -21,7 +21,7 @@ HIDE_DATASET = False  # set False when 100% sure about repo quality
 # * After uploading to instance ##
 ##################################
 LICENSE: License = License.Custom(source_url="https://www.kaggle.com/datasets/sani84/glasmiccai2015-gland-segmentation")
-APPLICATIONS: List[Union[Industry, Domain, Research]] = [Industry.Medical(),Research.Medical()]
+APPLICATIONS: List[Union[Industry, Domain, Research]] = [Industry.Medical(), Research.Medical()]
 CATEGORY: Category = Category.Medical()
 
 CV_TASKS: List[CVTask] = [CVTask.InstanceSegmentation(), CVTask.SemanticSegmentation(), CVTask.ObjectDetection()]
@@ -43,7 +43,7 @@ GITHUB_URL: str = "https://github.com/dataset-ninja/gland-segmentation"
 ##################################
 ### * Optional after uploading ###
 ##################################
-DOWNLOAD_ORIGINAL_URL: Optional[Union[str, dict]] = ["https://www.kaggle.com/datasets/sani84/glasmiccai2015-gland-segmentation"]
+DOWNLOAD_ORIGINAL_URL: Optional[Union[str, dict]] = "https://www.kaggle.com/datasets/sani84/glasmiccai2015-gland-segmentation"
 # Optional link for downloading original dataset (e.g. "https://some.com/dataset/download")
 
 CLASS2COLOR: Optional[Dict[str, List[str]]] = None
@@ -51,12 +51,13 @@ CLASS2COLOR: Optional[Dict[str, List[str]]] = None
 
 # If you have more than the one paper, put the most relatable link as the first element of the list
 # Use dict key to specify name for a button
-PAPER: Optional[Union[str, List[str], Dict[str, str]]] = ["https://arxiv.org/abs/1603.00275"]
+PAPER: Optional[Union[str, List[str], Dict[str, str]]] = "https://arxiv.org/abs/1603.00275"
 BLOGPOST: Optional[Union[str, List[str], Dict[str, str]]] = None
 REPOSITORY: Optional[Union[str, List[str], Dict[str, str]]] = None
 
-CITATION_URL: Optional[str] = ["https://arxiv.org/abs/1603.00275"]
+CITATION_URL: Optional[str] = "https://arxiv.org/abs/1603.00275"
 AUTHORS: Optional[List[str]] = ["Korsuk Sirinukunwattana", "Josien P. W. Pluim", "Hao Chen", "Xiaojuan Qi", "Pheng-Ann Heng", "Yun Bo Guo", "Li Yang Wang", "Bogdan J. Matuszewski", "Elia Bruni", "Urko Sanchez", "Anton Böhm", "Olaf Ronneberger", "Bassem Ben Cheikh", "Daniel Racoceanu", "Philipp Kainz", "Michael Pfeiffer", "Martin Urschler", "David R. J. Snead", "Nasir M. Rajpoot"]
+AUTHORS_CONTACTS: Optional[List[str]] = ["n.m.rajpoot@warwick.ac.uk"]
 
 ORGANIZATION_NAME: Optional[Union[str, List[str]]] = ["University of Warwick", "Eindhoven University of Technology", "The Chinese University of Hong Kong", "University of Central Lancashire", "University of Freiburg", "ExB Research and Development", "Biomedical Imaging Laboratory (LIB)", "Medical University of Graz", "University of Zurich and ETH Zurich", "Graz University of Technology", "Ludwig Boltzmann Institute for Clinical Forensic Imaging", "University Hospitals Coventry and Warwickshire"]
 ORGANIZATION_URL: Optional[Union[str, List[str]]] = ["https://warwick.ac.uk/", "https://www.tue.nl/en/", "https://www.cuhk.edu.hk/", "https://www.uclan.ac.uk/", "https://uni-freiburg.de/en/", "https://exb.de/en/", "https://www.lib.upmc.fr/", "https://www.medunigraz.at/en/", "https://ethz.ch/en.html", "https://www.tugraz.at/en/home/", "https://cfi.lbg.ac.at/en", "https://www.uhcw.nhs.uk/"]
@@ -110,6 +111,7 @@ def get_settings():
     settings["repository"] = REPOSITORY
     settings["citation_url"] = CITATION_URL
     settings["authors"] = AUTHORS
+    settings["authors_contacts"] = AUTHORS_CONTACTS
     settings["organization_name"] = ORGANIZATION_NAME
     settings["organization_url"] = ORGANIZATION_URL
     settings["slytagsplit"] = SLYTAGSPLIT
