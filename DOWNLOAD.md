@@ -1,6 +1,6 @@
 Dataset **GlaS@MICCAI'2015: Gland Segmentation** can be downloaded in [Supervisely format](https://developer.supervisely.com/api-references/supervisely-annotation-json-format):
 
- [Download](https://www.dropbox.com/scl/fi/26opak93oe9qlsbn6m4co/glas-miccai-2015-gland-segmentation-DatasetNinja.tar?rlkey=j65y1ac2ne2m4db1pk4yovd4r&dl=1)
+ [Download](https://assets.supervisely.com/remote/eyJsaW5rIjogImZzOi8vYXNzZXRzLzIzNjhfR2xhU0BNSUNDQUknMjAxNTogR2xhbmQgU2VnbWVudGF0aW9uL2dsYXNAbWljY2FpJzIwMTU6LWdsYW5kLXNlZ21lbnRhdGlvbi1EYXRhc2V0TmluamEudGFyIiwgInNpZyI6ICJ4TjlXTFVZTStjbFNpOEZ4KzlXUzNWTzlFK1gvcWV2UThrSFZST1Jwd0F3PSJ9)
 
 As an alternative, it can be downloaded with *dataset-tools* package:
 ``` bash
